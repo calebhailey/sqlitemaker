@@ -1,0 +1,6 @@
+.hg*
+.hg/*
+*.pyc
+*.csv
+*.db
+*.sqlite*
