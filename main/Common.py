@@ -2,6 +2,7 @@
 import codecs
 import datetime
 import json
+import os
 import sys
 
 # naughty globals
@@ -15,10 +16,15 @@ class dotdict(dict):
 
 class Settings(object):
     def __init__(self, settings_file, section=None):
+        self.logger = Logger()
         self.source = settings_file
-        self.file = codecs.open(self.source, 'rb', encoding)
-        self.settings = dotdict(self.read(section))
-        self.file.close()
+        if os.path.exists(self.source):
+            self.file = codecs.open(self.source, 'rb', encoding)
+            self.settings = dotdict(self.read(section))
+            self.file.close()
+        else:
+            self.settings = dotdict({})
+            self.logger.log('unable to locate file %s' % (os.path.abspath(settings_file)), 'ERROR')
 
     def read(self, section):
         self.file = codecs.open(self.file.name, self.file.mode, self.file.encoding)

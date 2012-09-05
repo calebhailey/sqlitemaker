@@ -2,6 +2,7 @@
 #
 
 # stlib imports
+import os
 import pdb
 import sys
 
@@ -10,16 +11,19 @@ from main.Common import Logger, Settings
 from main.Database import DBCSV, SQLite
 from main.Options import Options
 
-
 class SQLiteMaker(object):
-    def __init__(self):
+    def __init__(self, settings_file):
         self.logger = Logger()
-        self.config = Settings('settings.json') 
+        self.config = Settings(settings_file)
+        if self.logger.debug:
+            self.config.logger.debug = True
 
         #
         # command line interface stuff...
         #
         self.option = Options(prog='sqlitemaker')
+        if self.logger.debug:
+            self.option.logger.debug = True
 
         # option groups
         self.option.addGroup(
@@ -77,7 +81,7 @@ class SQLiteMaker(object):
                 field += ' (recommended)'
             print('\t\t%s. %s' % (index, field))
         selection = raw_input('\n\tSelect one: ')
-        print()
+        print('')
         if not selection:
             selection = recommended
         try:
@@ -89,6 +93,8 @@ class SQLiteMaker(object):
 
     def setup_database(self, db_file, table, primary_key):
         self.db = SQLite(db_file)
+        if self.logger.debug:
+            self.db.logger.debug = True
         #db.logger.debug = True
         self.csv.data.fieldnames = self.db.create_schema(table, self.csv.data.fieldnames, self.csv.data)
         self.db.create_table(table, primary_key)
@@ -122,6 +128,8 @@ class SQLiteMaker(object):
 
     def run(self, input_file, table, primary_key, output_file):
         self.csv = DBCSV(input_file)
+        if self.logger.debug:
+            self.csv.logger.debug = True
         self.csv.read()
         self.table = table
         self.primary_key = primary_key
@@ -135,17 +143,11 @@ class SQLiteMaker(object):
         self.process()
 
 if __name__ == '__main__':
-    sqlitemaker = SQLiteMaker()
-
-    # debug output
-    sqlitemaker.logger.debug = True
-    sqlitemaker.logger.log('--', 'DEBUG')
-    sqlitemaker.logger.log('config file settings: %s' % sqlitemaker.config.settings, 'DEBUG')
-    sqlitemaker.logger.log('arguments: %s' % (sqlitemaker.option.arguments.__dict__), 'DEBUG')
-    sqlitemaker.logger.log('python version: %s' % (sys.version.replace('\n', '')), 'DEBUG')
-    sqlitemaker.logger.log('--', 'DEBUG')
+    working_dir = os.path.dirname(os.path.abspath(__file__))
+    settings_file = os.path.join(working_dir, 'settings.json')
+    sqlitemaker = SQLiteMaker(settings_file)
+    #sqlitemaker.logger.debug = True
     
-    # do stuff
     if sqlitemaker.option.arguments.input:
         sqlitemaker.run(
             sqlitemaker.option.arguments.input,
