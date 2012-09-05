@@ -1,17 +1,19 @@
 # Introduction
-
-`sqlitemaker` is a tool for converting csv data to sqlite databases. It is 
+**SqliteMaker** is a tool for converting csv data to sqlite databases. It is 
 written in [Python][python] using ugly hacks with some [SQLAlchemy][sqlalchemy] 
 ORM-sauce sprinkled on top. 
 
 This is an old tool I wrote while learning how to write python (perhaps my first
 complete python project). I've recently tried my hand at a rewrite so that the 
 code is a little less embarassing, but I'm sure there are still some laughable 
-hacks and other ugly corners... having said that - it _does_ work. I still this 
-quite often in my daily analytical work, and for many more tasks than I 
+hacks and other ugly corners... having said that - it _does_ work. I still use 
+this quite often in my daily analytical work, and for many more tasks than I 
 originally intended. YMMV.
 
-To see the man-style help documentation, simply run `python sqlitemaker.py -h` 
+To see the man-style help documentation, simply run: 
+```
+$ python sqlitemaker.py -h
+```
 
 # Purpose / Use Cases
 
@@ -31,7 +33,7 @@ accomplished with some simple `SELECT` statements in a SQL query.
 
 ## Examples
 
-The most common thing I do with `sqlitemaker` is take an Excel spreadsheet, 
+The most common thing I do with **SqliteMaker** is take an Excel spreadsheet, 
 export it as a csv, and convert it to a [SQLite][sqlite] database. From there 
 I'll usually open the database using a tool like [Sqliteman][sqliteman] 
 (recommended) or [SQLite Database Browser][sqlitebrowser], and use the built-in 
@@ -40,16 +42,18 @@ export query results as a csv file, so you can get your modified / analyzed
 results back into the original format you started with.
 
 To try this for yourself, copy a csv file into the directory where you have 
-downloaded `sqlitemaker` and run: 
+downloaded **SqliteMaker** and run: 
 
 ```
-python sqlitemaker.py -i sample.csv
+$ python sqlitemaker.py -i sample.csv
 ```
 
 # Feedback
 
-Drop me a line and let me know if this project is of interest to you, or if you
-have any questions: [calebhailey@gmail.com](mailto:calebhailey@gmail.com)
+Mention me on Twitter at [@calebhailey][calebhailey] or 
+[@SQLiteMaker][sqlitemaker], or drop me a line and let me know if this project 
+is of interest to you, or if you have any questions: 
+[calebhailey@gmail.com](mailto:calebhailey@gmail.com)
 
 
 [python]: http://www.python.org "Python Home Page"
@@ -57,5 +61,7 @@ have any questions: [calebhailey@gmail.com](mailto:calebhailey@gmail.com)
 [sqlite]: http://www.sqlite.org "SQLite Home Page"
 [sqliteman]: http://sqliteman.com/ "SQLiteman - SQLite Databases Made Easy"
 [sqlitebrowser]: http://sqlitebrowser.sourceforge.net/ "SQLite Database Browser"
+[calebhailey]: http://www.twitter.com/calebhailey "Follow me on Twitter"
+[sqlitemaker]: http://www.twitter.com/sqlitemaker "Follow my project on Twitter"
 
 
