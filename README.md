@@ -48,6 +48,10 @@ downloaded **SqliteMaker** and run:
 $ python sqlitemaker.py -i sample.csv
 ```
 
+# Install Instructions
+
+Coming soon... (the short version is that you need [python] & [sqlalchemy])
+
 # Feedback
 
 Mention me on Twitter at [@calebhailey][calebhailey] or 
