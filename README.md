@@ -50,7 +50,8 @@ $ python sqlitemaker.py -i sample.csv
 
 # Install Instructions
 
-Coming soon... (the short version is that you need [python] & [sqlalchemy])
+Coming soon... (the short version is that you need [python] & [sqlalchemy] 
+to be installed before you can run **SQLiteMaker**)
 
 # Feedback
 
