@@ -1,5 +1,6 @@
 .hg*
 .hg/*
+*.bak
 *.pyc
 *.csv
 *.db
