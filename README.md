@@ -15,6 +15,12 @@ To see the man-style help documentation, simply run `python sqlitemaker.py -h`
 Drop me a line and let me know if this project is of interest to you, or if you
 have any questions: [calebhailey@gmail.com](mailto:calebhailey@gmail.com)
 
+# ToDo
+
+1. Add ability to check for existence of field, add it if it's missing.
+2. Parse CSV
+
 [python]: http://www.python.org "Python"
 [sqlalchemy]: http://www.sqlalchemy.org/ "SQLAlchemy - The Database Toolkit for Python"
+
 
