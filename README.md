@@ -7,8 +7,9 @@ ORM-sauce sprinkled on top.
 This is an old tool I wrote while learning how to write python (perhaps my first
 complete python project). I've recently tried my hand at a rewrite so that the 
 code is a little less embarassing, but I'm sure there are still some laughable 
-hacks and other ugly corners, but it _does_ work. I still this quite often in my 
-daily analytical work, and for many more tasks than I originally intended. YMMV.
+hacks and other ugly corners... having said that - it _does_ work. I still this 
+quite often in my daily analytical work, and for many more tasks than I 
+originally intended. YMMV.
 
 To see the man-style help documentation, simply run `python sqlitemaker.py -h` 
 
