@@ -12,18 +12,14 @@ from main.Database import DBCSV, SQLite
 from main.Options import Options
 
 class SQLiteMaker(object):
-    def __init__(self, settings_file):
-        self.logger = Logger()
-        self.config = Settings(settings_file)
-        if self.logger.debug:
-            self.config.logger.debug = True
+    def __init__(self, settings_file, log_file=None, debug=False):
+        self.logger = Logger(log_file, debug, source='sqlitemaker.logger')
+        self.config = Settings(settings_file, log_file=log_file, debug=debug)
 
         #
         # command line interface stuff...
         #
-        self.option = Options(prog='sqlitemaker')
-        if self.logger.debug:
-            self.option.logger.debug = True
+        self.option = Options(prog='sqlitemaker', log_file=self.logger.log_file, debug=self.logger.debug)
 
         # option groups
         self.option.addGroup(
@@ -72,6 +68,10 @@ class SQLiteMaker(object):
         self.option.parseArgs() # availble at self.option.arguments
 
     def recommend(self):
+        if len(self.csv.recommendations) == 1:
+            primary_key = self.csv.recommendations[0]
+            self.csv.logger.log('automatically selecting the "%s" field as the primary_key (it is the only field containing unique contents)' % (primary_key), 'DEBUG')
+            return primary_key
         recommended = None
         print('\n\tPlease select a primary key from one of the following:\n')
         for field in sorted(self.csv.recommendations):
@@ -92,10 +92,7 @@ class SQLiteMaker(object):
         return primary_key        
 
     def setup_database(self, db_file, table, primary_key):
-        self.db = SQLite(db_file)
-        if self.logger.debug:
-            self.db.logger.debug = True
-        #db.logger.debug = True
+        self.db = SQLite(db_file, log_file=self.logger.log_file, debug=self.logger.debug)
         self.csv.data.fieldnames = self.db.create_schema(table, self.csv.data.fieldnames, self.csv.data)
         self.db.create_table(table, primary_key)
         self.db.commit()
@@ -127,9 +124,7 @@ class SQLiteMaker(object):
         return
 
     def run(self, input_file, table, primary_key, output_file):
-        self.csv = DBCSV(input_file)
-        if self.logger.debug:
-            self.csv.logger.debug = True
+        self.csv = DBCSV(input_file, log_file=self.logger.log_file, debug=self.logger.debug)
         self.csv.read()
         self.table = table
         self.primary_key = primary_key
@@ -145,8 +140,10 @@ class SQLiteMaker(object):
 if __name__ == '__main__':
     working_dir = os.path.dirname(os.path.abspath(__file__))
     settings_file = os.path.join(working_dir, 'settings.json')
-    sqlitemaker = SQLiteMaker(settings_file)
-    #sqlitemaker.logger.debug = True
+    log_file = os.path.join(working_dir, 'sqlitemaker.log')
+    #sqlitemaker = SQLiteMaker(settings_file, log_file, debug=True)
+    #sqlitemaker = SQLiteMaker(settings_file, debug=True)
+    sqlitemaker = SQLiteMaker(settings_file, log_file)
     
     if sqlitemaker.option.arguments.input:
         sqlitemaker.run(

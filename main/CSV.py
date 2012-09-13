@@ -11,14 +11,14 @@ from Common import Logger
 encoding = 'utf-8-sig'
 
 class CSV(object):
-    def __init__(self, source):
+    def __init__(self, source, log_file=None, debug=False):
         self.source = source
         self.file = codecs.open(self.source, 'rb', encoding)
         self.dialect = csv.excel # default dialect
         self.backup()
         self.sniff()
         self.recommendations = []
-        self.logger = Logger()
+        self.logger = Logger(log_file, debug, 'CSV.logger')
 
     def backup(self):
         backup = self.source + '.bak'

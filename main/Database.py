@@ -18,14 +18,14 @@ from Common import Logger
 from CSV import CSV
 
 class Database():
-    def __init__(self, db_file=None, logfile=None):
+    def __init__(self, db_file=None, log_file=None, debug=False):
         self.dbms = 'unknown'
         self.metadata = sqlalchemy.MetaData()
         self.schema = {}
         self.tables = {}
         self.types = {}
         self.sources = {}
-        self.logger = Logger(None)
+        self.logger = Logger(log_file, debug, 'Database.logger')
     
     def _detect_datatype(self, sample):
         """ Supported sqlalchemy types: Boolean, DateTime, Integer, Float, Text
@@ -122,8 +122,8 @@ class Database():
         return
 
 class SQLite(Database):
-    def __init__(self, db_file=None, logfile=None):
-        Database.__init__(self)
+    def __init__(self, db_file, log_file=None, debug=False):
+        Database.__init__(self, log_file=log_file, debug=debug)
         self.dbms = 'sqlite'
         if not db_file:
             db_file = ':memory:'
@@ -137,8 +137,8 @@ class DBCSV(CSV):
     """ Database.CSV adds primary key recommendation on top of the CSV.CSV base 
         class. 
     """
-    def __init__(self, source):
-        CSV.__init__(self, source)
+    def __init__(self, source, log_file=None, debug=False):
+        CSV.__init__(self, source, log_file, debug)
     
     def read(self):
         """ A wrapper on csv.DictReader()

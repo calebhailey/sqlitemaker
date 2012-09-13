@@ -1,5 +1,6 @@
 {
     "version": 0.1,
-    "pages": 10000
+    "pages": 10000,
+    "debug": false
 }
 

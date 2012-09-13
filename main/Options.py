@@ -13,8 +13,8 @@ class Options():
     """ A wrapper on the stlib argparse module (plus some other extras), to
         make it easy to dynamically add command line options to other scripts.
     """
-    def __init__(self, prog=default_prog, add_help=True):
-        self.logger = Logger()
+    def __init__(self, prog=default_prog, add_help=True, log_file=None, debug=False):
+        self.logger = Logger(log_file, debug, 'Options.logger')
         self.groups = dotdict({})
         self.options = dotdict({})
         self.parser = argparse.ArgumentParser(prog=prog, add_help=add_help)
