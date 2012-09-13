@@ -140,7 +140,7 @@ class SQLiteMaker(object):
 if __name__ == '__main__':
     working_dir = os.path.dirname(os.path.abspath(__file__))
     settings_file = os.path.join(working_dir, 'settings.json')
-    log_file = os.path.join(working_dir, 'sqlitemaker.log')
+    log_file = 'sqlitemaker.log' #write output to current directory vs installed path
     #sqlitemaker = SQLiteMaker(settings_file, log_file, debug=True)
     #sqlitemaker = SQLiteMaker(settings_file, debug=True)
     sqlitemaker = SQLiteMaker(settings_file, log_file)
