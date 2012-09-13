@@ -1,5 +1,5 @@
 # Introduction
-**SqliteMaker** is a tool for converting csv data to sqlite databases. It is 
+**SQLiteMaker** is a tool for converting csv data to sqlite databases. It is 
 written in [Python][python] using ugly hacks with some [SQLAlchemy][sqlalchemy] 
 ORM-sauce sprinkled on top. 
 
@@ -12,7 +12,7 @@ originally intended. YMMV.
 
 To see the man-style help documentation, simply run: 
 ```
-$ python sqlitemaker.py -h
+$ python SQLiteMaker.py -h
 ```
 
 # Purpose / Use Cases
@@ -33,7 +33,7 @@ accomplished with some simple `SELECT` statements in a SQL query.
 
 ## Examples
 
-The most common thing I do with **SqliteMaker** is take an Excel spreadsheet, 
+The most common thing I do with **SQLiteMaker** is take an Excel spreadsheet, 
 export it as a csv, and convert it to a [SQLite][sqlite] database. From there 
 I'll usually open the database using a tool like [Sqliteman][sqliteman] 
 (recommended) or [SQLite Database Browser][sqlitebrowser], and use the built-in 
@@ -42,10 +42,10 @@ export query results as a csv file, so you can get your modified / analyzed
 results back into the original format you started with.
 
 To try this for yourself, copy a csv file into the directory where you have 
-downloaded **SqliteMaker** and run: 
+downloaded **SQLiteMaker** and run: 
 
 ```
-$ python sqlitemaker.py -i sample.csv
+$ python SQLiteMaker.py -i sample.csv
 ```
 
 # Install Instructions
@@ -57,7 +57,7 @@ $ python setup.py install
 # Feedback
 
 Mention me on Twitter at [@calebhailey][calebhailey] or 
-[@SQLiteMaker][sqlitemaker], or drop me a line and let me know if this project 
+[@SQLiteMaker][SQLiteMaker], or drop me a line and let me know if this project 
 is of interest to you, or if you have any questions: 
 [calebhailey@gmail.com](mailto:calebhailey@gmail.com)
 
@@ -68,6 +68,6 @@ is of interest to you, or if you have any questions:
 [sqliteman]: http://sqliteman.com/ "SQLiteman - SQLite Databases Made Easy"
 [sqlitebrowser]: http://sqlitebrowser.sourceforge.net/ "SQLite Database Browser"
 [calebhailey]: http://www.twitter.com/calebhailey "Follow me on Twitter"
-[sqlitemaker]: http://www.twitter.com/sqlitemaker "Follow my project on Twitter"
+[SQLiteMaker]: http://www.twitter.com/SQLiteMaker "Follow my project on Twitter"
 
 
