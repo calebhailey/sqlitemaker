@@ -168,7 +168,18 @@ class DBCSV(CSV):
                         except KeyError:
                             continue
                     else:
-                        recommendations[name].append(value)                        
+                        recommendations[name].append(value)
+            except UnicodeEncodeError:
+                self.logger.log('UnicodeEncodeError on line #%s, using unicode-friendly fallback' % (self.data.line_num), 'DEBUG')
+                document = self._get_row_by_line_num(self.data.line_num)
+                for name, value in document.items():
+                    if value in recommendations.get(name, [value]):
+                        try:
+                            recommendations.pop(name)
+                        except KeyError:
+                            continue
+                    else:
+                        recommendations[name].append(value)
             except StopIteration:
                 break
         self.recommendations = recommendations.keys()
